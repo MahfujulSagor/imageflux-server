@@ -17,7 +17,7 @@ Make sure you have the following installed:
 - [Cloudinary account](https://cloudinary.com/) (for managing images)
 - [Git](https://git-scm.com/) (for version control)
 
-### Steps for Usage
+## Steps for Usage
 
 1. **Clone the repository.**
 2. **Install dependencies using npm.**
