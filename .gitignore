@@ -1,0 +1,10 @@
+# Node modules
+node_modules/
+
+# Environment variables files
+.env          # Common environment variables file
+.env.local    # Local overrides
+.env.development # Development environment variables
+.env.test     # Test environment variables
+.env.production # Production environment variables
+.env*
