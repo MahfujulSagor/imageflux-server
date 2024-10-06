@@ -8,3 +8,9 @@ node_modules/
 .env.test     # Test environment variables
 .env.production # Production environment variables
 .env*
+
+# Logs
+*.log
+
+# Vercel files
+.vercel/
