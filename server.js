@@ -9,7 +9,10 @@ dotenv.config(); // Load environment variables
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  methods: ['POST', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 app.use(morgan('dev'));
 app.use(express.json());
 
