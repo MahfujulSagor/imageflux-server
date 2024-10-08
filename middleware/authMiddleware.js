@@ -8,9 +8,9 @@ client
   .setProject("66fe733e000e7494a932");
 
 export const authenticate = async (req, res, next) => {
-  // const authHeader = req.headers['authorization'];
-  // const sessionId = authHeader ? authHeader.replace('Bearer ', '') : null;
-  const sessionId = '66fe96e3ca4e240ee34b';
+  const authHeader = req.headers['authorization'];
+  const sessionId = authHeader ? authHeader.replace('Bearer ', '') : null;
+  
   if (!sessionId) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
