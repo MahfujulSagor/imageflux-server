@@ -8,7 +8,7 @@ client
   .setProject("66fe733e000e7494a932");
 
 export const authenticate = async (req, res, next) => {
-  const sessionId = req.headers['Authorization']; // Extract token from the header
+  const sessionId = req.headers.get('Authorization'); // Extract token from the header
   
   if (!sessionId) {
     return res.status(401).json({ message: 'Unauthorized' });
