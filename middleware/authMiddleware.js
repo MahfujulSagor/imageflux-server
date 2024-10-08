@@ -6,6 +6,8 @@ const client = new Client();
 client
   .setEndpoint("https://cloud.appwrite.io/v1")
   .setProject("66fe733e000e7494a932");
+  
+const account = new Account(client);
 
 export const authenticate = async (req, res, next) => {
   const authHeader = req.headers['authorization'];
@@ -16,7 +18,6 @@ export const authenticate = async (req, res, next) => {
   }
 
   try {
-    const account = new Account(client);
     const session = await account.getSession(sessionId);
 
     if (!session) {
