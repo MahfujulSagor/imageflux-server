@@ -9,7 +9,6 @@ client
 
 export const authenticate = async (req, res, next) => {
   const sessionId = req.headers['Authorization']?.replace('Bearer ', ''); // Extract token from the header
-  console.log('Received Session ID on server:', sessionId);
   
   if (!sessionId) {
     return res.status(401).json({ message: 'Unauthorized' });
