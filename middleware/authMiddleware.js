@@ -18,6 +18,7 @@ export const authenticate = async (req, res, next) => {
     }
 
     const sessionId = authHeader.split(" ")[1];
+    console.log(sessionId);
 
     if (!sessionId) {
       console.log("Session ID is missing");
