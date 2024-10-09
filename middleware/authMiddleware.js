@@ -1,5 +1,4 @@
-import { Client } from 'appwrite';
-import { Account } from 'appwrite';
+import { Client, Account } from 'node-appwrite';
 
 const client = new Client();
 
@@ -19,7 +18,7 @@ export const authenticate = async (req, res, next) => {
   }
 
   try {
-    const session = await account.getSession(sessionId);
+    const session = await account.getSession(userId, sessionId);
 
     if (!session) {
       return res.status(401).json({ message: 'Invalid or expired session' });
