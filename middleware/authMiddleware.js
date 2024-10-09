@@ -11,14 +11,13 @@ const account = new Account(client);
 export const authenticate = async (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const sessionId = authHeader ? authHeader.replace('Bearer ', '') : null;
-  const userId = req.headers['x-user-id'];
   
   if (!sessionId || !userId) {
-    return res.status(401).json({ message: 'Unauthorized, sessionId or userId missing' });
+    return res.status(401).json({ message: 'Unauthorized, sessionId missing' });
   }
 
   try {
-    const session = await account.getSession(userId, sessionId);
+    const session = await account.getSession(sessionId);
 
     if (!session) {
       return res.status(401).json({ message: 'Invalid or expired session' });
