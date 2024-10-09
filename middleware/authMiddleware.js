@@ -18,7 +18,6 @@ export const authenticate = async (req, res, next) => {
     }
 
     const sessionId = authHeader.split(" ")[1];
-    console.log(sessionId);
 
     if (!sessionId) {
       console.log("Session ID is missing");
@@ -40,6 +39,6 @@ export const authenticate = async (req, res, next) => {
     console.error("Error in authentication middleware:", error);
     return res
       .status(500)
-      .json({ message: "Internal server error", error: error.message });
+      .json({ message: "Internal server error", error: error.message, sessionId });
   }
 };
