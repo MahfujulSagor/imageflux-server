@@ -12,7 +12,7 @@ export const authenticate = async (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const sessionId = authHeader ? authHeader.replace('Bearer ', '') : null;
   
-  if (!sessionId || !userId) {
+  if (!sessionId) {
     return res.status(401).json({ message: 'Unauthorized, sessionId missing' });
   }
 
