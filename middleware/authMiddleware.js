@@ -1,13 +1,13 @@
-import { Client, Account } from "appwrite";
+import { Client, Account, Databases } from "appwrite";
 
 const client = new Client();
 
 client
   .setEndpoint(process.env.APPWRITE_ENDPOINT)
   .setProject(process.env.APPWRITE_PROJECT_ID)
-  .setPlatform(process.env.APPWRITE_PLATFORM)
 
 const account = new Account(client);
+export const databases = new Databases(client);
 
 export const authenticate = async (req, res, next) => {
   try {
@@ -18,16 +18,26 @@ export const authenticate = async (req, res, next) => {
       return res.status(401).json({ message: "Authorization header missing" });
     }
 
-    const sessionId = authHeader.split(" ")[1];
+    const userId = authHeader.split(" ")[1];
 
-    if (!sessionId) {
+    if (!userId) {
       console.log("Session ID is missing");
       return res.status(401).json({ message: "Session ID missing" });
     }
 
     try {
-      const session = await account.getSession(sessionId); // Validate the session
-      console.log("Session valid:", session);
+      // const session = await account.getSession(sessionId);
+      // console.log("Session valid:", session);
+
+      const currentUser = await databases.listDocuments(
+        process.env.APPWRITE_DATABASE_ID,
+        process.env.APPWRITE_USER_COLLECTION_ID,
+        [Query.equal("accountId", userId)]
+      );
+
+      if (!currentUser) {
+        return res.status(404).json({ message: "User is missing!" });
+      }
 
       next();
     } catch (error) {
