@@ -1,33 +1,44 @@
-import { Client, Account } from 'node-appwrite';
+import { Client, Account } from "appwrite";
 
 const client = new Client();
 
 client
   .setEndpoint(process.env.APPWRITE_ENDPOINT)
-  .setProject(process.env.APPWRITE_PROJECT_ID)
-  .setKey(process.env.APPWRITE_API_KEY);
-  
+  .setProject(process.env.APPWRITE_PROJECT_ID);
+
 const account = new Account(client);
 
 export const authenticate = async (req, res, next) => {
-  const authHeader = req.headers['Authorization'];
-  const sessionId = authHeader ? authHeader.replace('Bearer ', '') : null;
-  
-  if (!sessionId) {
-    return res.status(401).json({ message: 'Unauthorized, sessionId missing' });
-  }
-
   try {
-    const session = await account.getSession(sessionId);
+    const authHeader = req.headers.authorization; // Get the Authorization header
 
-    if (!session) {
-      return res.status(401).json({ message: 'Invalid or expired session' });
+    if (!authHeader) {
+      console.log("Authorization header missing");
+      return res.status(401).json({ message: "Authorization header missing" });
     }
 
-    req.user = session;
-    next();
+    const sessionId = authHeader.split(" ")[1];
+
+    if (!sessionId) {
+      console.log("Session ID is missing");
+      return res.status(401).json({ message: "Session ID missing" });
+    }
+
+    try {
+      const session = await account.getSession(sessionId); // Validate the session
+      console.log("Session valid:", session);
+
+      next();
+    } catch (error) {
+      console.error("Invalid session ID", error.message);
+      return res
+        .status(403)
+        .json({ message: "Invalid session ID", error: error.message });
+    }
   } catch (error) {
-    console.error('Authentication error:', error);
-    return res.status(401).json({ message: 'Invalid token' });
+    console.error("Error in authentication middleware:", error);
+    return res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 };
