@@ -30,8 +30,8 @@ export const authenticate = async (req, res, next) => {
       // console.log("Session valid:", session);
 
       const currentUser = await databases.listDocuments(
-        "66fe7582002029276abb",
-        "66fe758c003de9e63bfb",
+        process.env.APPWRITE_DATABASE_ID,
+        process.env.APPWRITE_USER_COLLECTION_ID,
         [Query.equal("accountId", userId)]
       );
 
