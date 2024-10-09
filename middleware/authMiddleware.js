@@ -10,7 +10,7 @@ client
 const account = new Account(client);
 
 export const authenticate = async (req, res, next) => {
-  const authHeader = req.headers['authorization'];
+  const authHeader = req.headers['Authorization'];
   const sessionId = authHeader ? authHeader.replace('Bearer ', '') : null;
   
   if (!sessionId) {
