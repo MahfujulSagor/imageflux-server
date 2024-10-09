@@ -4,7 +4,8 @@ const client = new Client();
 
 client
   .setEndpoint(process.env.APPWRITE_ENDPOINT)
-  .setProject(process.env.APPWRITE_PROJECT_ID);
+  .setProject(process.env.APPWRITE_PROJECT_ID)
+  .setPlatform(process.env.APPWRITE_PLATFORM)
 
 const account = new Account(client);
 
