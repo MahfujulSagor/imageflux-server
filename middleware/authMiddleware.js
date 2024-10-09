@@ -1,4 +1,4 @@
-import { Client, Account, Databases, Query } from "appwrite";
+import { Client, Databases, Query } from "appwrite";
 
 const client = new Client();
 
@@ -6,12 +6,11 @@ client
   .setEndpoint(process.env.APPWRITE_ENDPOINT)
   .setProject(process.env.APPWRITE_PROJECT_ID)
 
-const account = new Account(client);
 export const databases = new Databases(client);
 
 export const authenticate = async (req, res, next) => {
   try {
-    const authHeader = req.headers.authorization; // Get the Authorization header
+    const authHeader = req.headers.authorization;
 
     if (!authHeader) {
       console.log("Authorization header missing");
@@ -22,13 +21,10 @@ export const authenticate = async (req, res, next) => {
 
     if (!userId) {
       console.log("Session ID is missing");
-      return res.status(401).json({ message: "Session ID missing" });
+      return res.status(401).json({ message: "User ID missing" });
     }
 
     try {
-      // const session = await account.getSession(sessionId);
-      // console.log("Session valid:", session);
-
       const currentUser = await databases.listDocuments(
         process.env.APPWRITE_DATABASE_ID,
         process.env.APPWRITE_USER_COLLECTION_ID,
@@ -41,10 +37,10 @@ export const authenticate = async (req, res, next) => {
 
       next();
     } catch (error) {
-      console.error("Invalid session ID", error.message);
+      console.error("Invalid user ID", error.message);
       return res
         .status(403)
-        .json({ message: "Invalid session ID", error: error.message });
+        .json({ message: "Invalid user ID", error: error.message });
     }
   } catch (error) {
     console.error("Error in authentication middleware:", error);
