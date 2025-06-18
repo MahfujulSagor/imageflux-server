@@ -10,6 +10,12 @@ This Express.js backend handles secure and scalable image uploads and deletions 
 - CORS enabled for cross-origin access from web and mobile clients.
 - Rate limit for api calls.
 
+## Technology Stack & Tools
+- Backend: Node.js, Express.js, RESTful APIs
+- Cloud: Cloudinary for media storage & management
+- Security: Input validation, CORS handling
+- Version Control: Git, GitHub
+
 ## Prerequisites
 
 Make sure you have the following installed:
@@ -38,8 +44,3 @@ CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 PORT=8080
 ```
-## Technology Stack & Tools
-- Backend: Node.js, Express.js, RESTful APIs
-- Cloud: Cloudinary for media storage & management
-- Security: Input validation, CORS handling
-- Version Control: Git, GitHub
