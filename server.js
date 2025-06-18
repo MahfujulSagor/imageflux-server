@@ -4,6 +4,7 @@ import uploadRoutes from './routes/uploadRoutes.js';
 import deleteRoutes from './routes/deleteRoutes.js';
 import cors from 'cors';
 import morgan from 'morgan';
+import rateLimit from 'express-rate-limit';
 
 dotenv.config(); // Load environment variables
 
@@ -17,6 +18,15 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
+
+// Rate limiting middleware
+const globalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests, please try again later.',
+});
+
+app.use("/api", globalLimiter);
 
 // Routes
 app.use('/api', uploadRoutes);
