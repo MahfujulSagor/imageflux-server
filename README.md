@@ -22,7 +22,7 @@ Make sure you have the following installed:
 
 - [Node.js](https://nodejs.org/)
 - [Cloudinary account](https://cloudinary.com/) (for managing images)
-- [Appwrite](https://appwrite.io/) (for authentication and backend services)
+- [Appwrite](https://appwrite.io/) (for authentication)
 - [Git](https://git-scm.com/) (for version control)
 
 ## Steps for Usage
