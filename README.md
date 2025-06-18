@@ -1,13 +1,14 @@
-# Cloudinary Image Upload and Delete API
+# ImageFlux Backend — Cloudinary Image Upload & Delete API
 
-This is an Express.js server that allows image uploads and deletions using the Cloudinary API. It includes two main endpoints for uploading images and deleting them based on their public ID.
+This Express.js backend handles secure and scalable image uploads and deletions via the Cloudinary API. It provides RESTful endpoints for managing image assets, designed for real-time, high-performance applications.
 
-## Features
+## Key Features
 
-- Upload images to Cloudinary using a file upload.
-- Delete images from Cloudinary using the public ID.
-- JSON responses with status messages for uploads and deletions.
-- Handles CORS for cross-origin requests.
+- Upload images to Cloudinary with file handling and validation.
+- Delete images securely using Cloudinary public IDs.
+- JSON-based RESTful API responses with status and error handling.
+- CORS enabled for cross-origin access from web and mobile clients.
+- Rate limit for api calls.
 
 ## Prerequisites
 
